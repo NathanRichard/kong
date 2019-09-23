@@ -577,6 +577,11 @@ local function overrides(k, default_v, opts, file_conf, arg_conf)
     end
 
     log.debug('%s ENV found with "%s"', env_name, to_print)
+
+    if string.match(env, "[^\\]#") then
+      log.warn('%s contains an unescaped "#" character and will not parse correctly. Please escape it with "\\#"', env_name)
+    end
+
     value = env
   end
 
